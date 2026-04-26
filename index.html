@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emergency ICE Data</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #121212; color: white; text-align: center; padding: 20px; }
+    .hidden { display: none; }
+    .card { background: #1e1e1e; padding: 20px; border-radius: 8px; border: 1px solid #333; max-width: 400px; margin: auto; }
+    input { padding: 10px; font-size: 20px; width: 100px; text-align: center; letter-spacing: 5px; }
+    button { padding: 10px 20px; font-size: 16px; background: #d32f2f; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 15px;}
+    h2 { color: #ff5252; margin-top: 0;}
+    .data-row { text-align: left; border-bottom: 1px solid #444; padding: 10px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- LAYER 1: THE AUTHENTICATION SCREEN -->
+  <div id="login-screen" class="card">
+    <h2>EMERGENCY ACCESS</h2>
+    <p>Scan successful. Enter the 4-Digit PIN printed on the physical card to decrypt SITREP.</p>
+    <input type="password" id="pin-input" maxlength="4">
+    <br>
+    <button onclick="checkPin()">UNLOCK DATA</button>
+    <p id="error-msg" style="color: #ff5252;" class="hidden">Access Denied: Invalid PIN</p>
+  </div>
+
+  <!-- LAYER 2: THE DATA PAYLOAD (Hidden by default) -->
+  <div id="data-screen" class="card hidden">
+    <h2>MEDICAL SITREP</h2>
+    <div class="data-row"><strong>NAME:</strong> SYNTHETIC TEST SUBJECT</div>
+    <div class="data-row"><strong>BLOOD TYPE:</strong> O-Negative</div>
+    <div class="data-row"><strong>ALLERGIES:</strong> Penicillin (Anaphylaxis)</div>
+    <div class="data-row"><strong>CONDITIONS:</strong> Type 1 Diabetic</div>
+    <div class="data-row"><strong>MEDICATIONS:</strong> Synthetic Insulin</div>
+    <div class="data-row"><strong>EMERGENCY CONTACT:</strong> Jane Doe (555-010-9999)</div>
+  </div>
+
+  <!-- THE ROUTING LOGIC -->
+  <script>
+    function checkPin() {
+      var pin = document.getElementById("pin-input").value;
+      // The master PIN is set to 1234 for this test deployment
+      if (pin === "1234") {
+        document.getElementById("login-screen").classList.add("hidden");
+        document.getElementById("data-screen").classList.remove("hidden");
+      } else {
+        document.getElementById("error-msg").classList.remove("hidden");
+      }
+    }
+  </script>
+
+</body>
+</html>
